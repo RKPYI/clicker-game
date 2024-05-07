@@ -1,0 +1,74 @@
+body {
+    background-color: rgb(54, 122, 124);
+}
+.header{
+    background-color: black;
+    color: aliceblue;
+    font-size: 25px;
+    font-weight: bold;
+}
+.sectionLeft{
+    float: left;
+    width: 75%;
+}
+.sectionRight{
+    float: right;
+    width: 25%;
+}
+.footer{
+    margin-top: 20%;
+}
+.scoreContainer{
+    background-color: rgba(19, 19, 19, 0.637);
+    color: white;
+    padding: 10px;
+    width: 40%;
+    border-radius: 10px;
+}
+.clickerContainer img{
+    position:relative;
+    transition: all .2s ease-in-out;
+}
+.clickerContainer img:hover{transform: scale(1.1);}
+.clickerContainer img:active{transform: scale(0.99);}
+
+.shopButton{
+    background-color: rgba(15, 15, 15, 1);
+    color: white;
+    transition: all .2s ease-in-out;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
+.shopButton:hover{
+    background-color: rgba(35, 35, 35, 1);
+    transition: all .2s ease-in-out;
+}
+
+.shopButton #image{
+    width: 20%;
+}
+.shopButton img{
+    height: 64px;
+    width: 64px;
+}
+.shopButton #nameAndCost p{
+    font-size: 12px;
+    margin: 2px;
+    width: 60%;
+}
+.shopButton #nameAndCost p:first-of-type{
+    font-size: 18px;
+}
+.shopButton #amount{
+    font-size: 32px;
+    font-family: roboto;
+    width: 15%;
+}
+
+.unseletable{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
