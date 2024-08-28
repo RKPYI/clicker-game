@@ -61,10 +61,10 @@ function buyGrandpa() {
     if (score >= grandpaCost) {
         score = score - grandpaCost;
         grandpas = grandpas + 1;
-        ovenCost = Math.round(grandpaCost * 1.25);
+        grandpaCost = Math.round(grandpaCost * 1.25);
 
         document.getElementById("score").innerHTML = score;
-        document.getElementById("grandpacost").innerHTML = grandpaCostCost;
+        document.getElementById("grandpacost").innerHTML = grandpaCost;
         document.getElementById("grandpas").innerHTML = grandpas;
 
         updateScorePerSecond();
