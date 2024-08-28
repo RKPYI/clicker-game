@@ -6,6 +6,8 @@ var grandmaCost = 100;
 var grandmas = 0;
 var ovenCost = 1250;
 var ovens = 0;
+var grandpaCost = 20000;
+var grandpas = 0;
 var scorePerSecond = 0;
 
 function addToScore(amount) {
@@ -55,8 +57,22 @@ function buyOven() {
     }
 }
 
+function buyGrandpa() {
+    if (score >= grandpaCost) {
+        score = score - grandpaCost;
+        grandpas = grandpas + 1;
+        ovenCost = Math.round(grandpaCost * 1.25);
+
+        document.getElementById("score").innerHTML = score;
+        document.getElementById("grandpacost").innerHTML = grandpaCostCost;
+        document.getElementById("grandpas").innerHTML = grandpas;
+
+        updateScorePerSecond();
+    }
+}
+
 function updateScorePerSecond() {
-    scorePerSecond = cursors + grandmas * 5 + ovens * 25;
+    scorePerSecond = cursors + grandmas * 5 + ovens * 25 + grandpas * 100;
     document.getElementById("scorepersecond").innerHTML = scorePerSecond;
 }
 
@@ -70,6 +86,8 @@ function loadGame() {
     if (typeof savedGame.grandmas !== "undefined") grandmas = savedGame.grandmas;
     if (typeof savedGame.ovenCost !== "undefined") ovenCost = savedGame.ovenCost;
     if (typeof savedGame.ovens !== "undefined") ovens = savedGame.ovens;
+    if (typeof savedGame.grandpaCost !== "undefined") grandpaCost = savedGame.grandpaCost;
+    if (typeof savedGame.grandpas !== "undefined") grandpas = savedGame.grandpas;
 }
 
 function saveGame() {
@@ -82,6 +100,8 @@ function saveGame() {
         grandmas: grandmas,
         ovenCost: ovenCost,
         ovens: ovens,
+        grandpaCost: grandpaCost,
+        grandpas: grandpas
     };
     localStorage.setItem("gameSave", JSON.stringify(gameSave));
 }
@@ -103,12 +123,15 @@ window.onload = function() {
     document.getElementById("grandmas").innerHTML = grandmas;
     document.getElementById("ovencost").innerHTML = ovenCost;
     document.getElementById("ovens").innerHTML = ovens;
+    document.getElementById("grandpacost").innerHTML = grandmaCost;
+    document.getElementById("grandpas").innerHTML = grandpas;
 };
 
 setInterval(function() {
     score = score + cursors;
     score = score + grandmas * 5;
     score = score + ovens * 25;
+    score = score + grandpas * 100;
     
     document.getElementById("score").innerHTML = score;
             }, 1000) // 1000ms = 1 second
