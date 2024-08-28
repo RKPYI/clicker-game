@@ -123,7 +123,7 @@ window.onload = function() {
     document.getElementById("grandmas").innerHTML = grandmas;
     document.getElementById("ovencost").innerHTML = ovenCost;
     document.getElementById("ovens").innerHTML = ovens;
-    document.getElementById("grandpacost").innerHTML = grandmaCost;
+    document.getElementById("grandpacost").innerHTML = grandpaCost;
     document.getElementById("grandpas").innerHTML = grandpas;
 };
 
