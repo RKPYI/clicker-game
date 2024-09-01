@@ -1,86 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>RDK Cookie Game</title>
-        <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmJ2lY1Bcs8LvhNsKK3PrKwVk8LPiDiePJstJb9fWKuEYRk-jZ" type="image/x-icon">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDK Cookie Game</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmJ2lY1Bcs8LvhNsKK3PrKwVk8LPiDiePJstJb9fWKuEYRk-jZ" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <header class="header unselectable">
+            <h2>RDK CLICKER GAME</h2>
+        </header>
 
-        <link rel="stylesheet" href="styles.css">
+        <main class="game-content">
+            <section class="section-left unselectable">
+                <div class="score-container">
+                    <span id="score">0</span> Cookies<br>
+                    <span id="scorepersecond">0</span> Cookies per second<br>
+                    <span id="rebirthMultiplier">x1.00 Multiplier</span>
+                </div>
 
-    </head>
+                <div class="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
 
-    <body>
-        <div class="header unseletable">
-            <h2 align="center">RDK CLICKER GAME</h2>
+                <div class="clicker-container">
+                    <img src="images/cookies.png" class="clicker-image" alt="Cookie" onclick="addToScore(clickingPower)">
+                </div>
+
+                <div class="footer unselectable">
+                    <button class="btn-reset" onclick="resetGame();">Reset Game</button>
+                    <button class="btn-rebirth">Rebirth</button> <!-- Modified to always open the rebirth modal -->
+                </div>
+            </section>
+
+            <section class="section-right unselectable">
+                <div class="shop-container">
+                    <div id="shop-item-cursor" class="shop-item" onclick="buyCursor()">
+                        <img src="images/cursor.png" alt="Cursor">
+                        <div class="item-details">
+                            <p>Cursor</p>
+                            <p>Cost: <span id="cursorcost">15</span> Cookies</p>
+                            <p>CPS: <span id="cursorCPS">1</span></p>
+                        </div>
+                        <div class="item-amount"><span id="cursors">0</span></div>
+                    </div>
+
+                    <div id="shop-item-grandma" class="shop-item locked" onclick="buyGrandma()">
+                        <img src="images/grandma.png" alt="Grandma">
+                        <div class="item-details">
+                            <p>Grandma</p>
+                            <p>Cost: <span id="grandmacost">100</span> Cookies</p>
+                            <p>CPS: <span id="grandmaCPS">5</span></p>
+                        </div>
+                        <div class="item-amount"><span id="grandmas">0</span></div>
+                    </div>
+
+                    <div id="shop-item-oven" class="shop-item locked" onclick="buyOven()">
+                        <img src="images/oven.png" alt="Oven">
+                        <div class="item-details">
+                            <p>Oven</p>
+                            <p>Cost: <span id="ovencost">1250</span> Cookies</p>
+                            <p>CPS: <span id="ovenCPS">25</span></p>
+                        </div>
+                        <div class="item-amount"><span id="ovens">0</span></div>
+                    </div>
+
+                    <div id="shop-item-grandpa" class="shop-item locked" onclick="buyGrandpa()">
+                        <img src="images/grandpas.png" alt="Grandpa">
+                        <div class="item-details">
+                            <p>Grandpa</p>
+                            <p>Cost: <span id="grandpacost">20000</span> Cookies</p>
+                            <p>CPS: <span id="grandpaCPS">100</span></p>
+                        </div>
+                        <div class="item-amount"><span id="grandpas">0</span></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Rebirth Modal -->
+    <div id="rebirthModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRebirthModal()">&times;</span>
+            <h2>Rebirth Confirmation</h2>
+            <p>Rebirthing will reset all your progress but give you a <strong>1.5x</strong> Cookies per Second (CPS) multiplier.</p>
+            <p>You currently have <span id="rebirthScore">0</span> cookies.</p>
+            <p>You need 500,000 cookies to rebirth.</p>
+            <button id="rebirthConfirmBtn" class="btn-confirm-rebirth" onclick="confirmRebirth()" disabled>Confirm Rebirth</button> <!-- Initially disabled -->
+            <button class="btn-cancel-rebirth" onclick="closeRebirthModal()">Cancel</button>
         </div>
+    </div>
 
-        <br>
-
-        <div class="sectionLeft unseletable">
-            <center>
-            <div class="scoreContainer">
-            <span id="score">0</span> Cookie <br>
-            <span id="scorepersecond">0</span> Cookie per second <br>
-            </div>
-
-            <div class="clickerContainer">
-            <img src="images/cookies.png" width="200px" height="auto" onclick="addToScore(clickingPower)">
-            </div>
-            </center>
-
-            <div class="footer unseletable">
-                <button onclick="resetGame();">Reset Game</button>
-            </div>
-        </div>
-
-        <div class="sectionRight unseletable">
-            <table class="shopButton" onclick="buyCursor()">
-                <tr>
-                    <td id="image"><img src="images/cursor.png"></td>
-                    <td id="nameAndCost">
-                        <p>Cursor</p>
-                        <p><span id="cursorcost">15</span> Cookies</p>
-                    </td>
-                    <td id="amount"><span id="cursors">0</span></td>
-                </tr>
-            </table>
-
-            <table class="shopButton" onclick="buyGrandma()">
-                <tr>
-                    <td id="image"><img src="images/grandma.png"></td>
-                    <td id="nameAndCost">
-                        <p>Grandma</p>
-                        <p><span id="grandmacost">100</span> Cookies</p>
-                    </td>
-                    <td id="amount"><span id="grandmas">0</span></td>
-                </tr>
-            </table>
-
-            <table class="shopButton" onclick="buyOven()">
-                <tr>
-                    <td id="image"><img src="images/oven.png"></td>
-                    <td id="nameAndCost">
-                        <p>Oven</p>
-                        <p><span id="ovencost">1250</span> Cookies</p>
-                    </td>
-                    <td id="amount"><span id="ovens">0</span></td>
-                </tr>
-            </table>
-
-            <table class="shopButton" onclick="buyGrandpa()">
-                <tr>
-                    <td id="image"><img src="images/grandpas.png"></td>
-                    <td id="nameAndCost">
-                        <p>Grandpa</p>
-                        <p><span id="grandpacost">20000</span> Cookies</p>
-                    </td>
-                    <td id="amount"><span id="grandpas">0</span></td>
-                </tr>
-            </table>
-
-        </div>    
-
-        <script src="script.js"></script>
-    </body>
-</HTML>
+    <script src="script.js"></script> <!-- Link to external JavaScript file -->
+</body>
+</html>

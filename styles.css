@@ -1,74 +1,281 @@
 body {
-    background-color: rgb(54, 122, 124);
-}
-.header{
-    background-color: black;
-    color: aliceblue;
-    font-size: 25px;
-    font-weight: bold;
-}
-.sectionLeft{
-    float: left;
-    width: 75%;
-}
-.sectionRight{
-    float: right;
-    width: 25%;
-}
-.footer{
-    margin-top: 20%;
-}
-.scoreContainer{
-    background-color: rgba(19, 19, 19, 0.637);
+    background-color: #367A7C;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     color: white;
     padding: 10px;
-    width: 40%;
-    border-radius: 10px;
+    box-sizing: border-box;
 }
-.clickerContainer img{
-    position:relative;
-    transition: all .2s ease-in-out;
-}
-.clickerContainer img:hover{transform: scale(1.1);}
-.clickerContainer img:active{transform: scale(0.99);}
 
-.shopButton{
-    background-color: rgba(15, 15, 15, 1);
-    color: white;
-    transition: all .2s ease-in-out;
-    border-radius: 10px;
+.container {
     width: 100%;
-    margin: 10px 0px 10px 0px;
-}
-.shopButton:hover{
-    background-color: rgba(35, 35, 35, 1);
-    transition: all .2s ease-in-out;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
 }
 
-.shopButton #image{
-    width: 20%;
+.header {
+    background-color: #111;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
 }
-.shopButton img{
-    height: 64px;
-    width: 64px;
+
+.header h2 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: #00d4ff;
 }
-.shopButton #nameAndCost p{
-    font-size: 12px;
-    margin: 2px;
-    width: 60%;
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
 }
-.shopButton #nameAndCost p:first-of-type{
+
+.section-left, .section-right {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.section-right {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.score-container {
+    background-color: #444;
+    color: white;
+    padding: 15px;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+#rebirthMultiplier {
     font-size: 18px;
-}
-.shopButton #amount{
-    font-size: 32px;
-    font-family: roboto;
-    width: 15%;
+    color: #FF5733;
 }
 
-.unseletable{
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.clicker-container {
+    text-align: center;
+}
+
+.clicker-image {
+    width: 100%;
+    max-width: 180px;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footer button {
+    background-color: #00d4ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+    width: 45%;
+}
+
+.footer button:hover {
+    background-color: #00a6c9;
+}
+
+.footer .btn-rebirth {
+    background-color: #FF5733;
+}
+
+.footer .btn-rebirth:hover {
+    background-color: #C74422;
+}
+
+.shop-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    height: calc(100% - 20px);
+}
+
+.shop-item {
+    background-color: #555;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.shop-item:hover {
+    background-color: #666;
+}
+
+.shop-item img {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+
+.item-details {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.item-details p {
+    margin: 0;
+    font-size: 14px;
+    word-wrap: break-word;
+    margin-top: 5px;
+}
+
+.item-amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00d4ff;
+    text-align: right;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.locked {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Modal container */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    margin: auto;
+    color: white;
+}
+
+.modal-content h2 {
+    margin: 0 0 15px;
+    color: #00d4ff;
+}
+
+.modal-content p {
+    margin: 15px 0;
+}
+
+.modal-content .btn-confirm-rebirth {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.modal-content .btn-confirm-rebirth:hover {
+    background-color: #C74422;
+}
+
+.modal-content .btn-cancel-rebirth {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.modal-content .btn-cancel-rebirth:hover {
+    background-color: #555;
+}
+
+/* Close button */
+.modal-content .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.modal-content .close:hover {
+    color: #ff5733;
+}
+
+.btn-confirm-rebirth:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+.modal-content .btn-confirm-rebirth[disabled]:hover {
+    background-color: #888; /* Prevent color change on hover */
+}
+
+@media (min-width: 768px) {
+    .game-content {
+        flex-direction: row;
+    }
+
+    .section-left {
+        width: 70%;
+        padding-right: 20px;
+    }
+
+    .section-right {
+        width: 28%;
+        max-height: 600px;
+    }
 }
